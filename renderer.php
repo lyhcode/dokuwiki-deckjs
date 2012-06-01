@@ -74,31 +74,31 @@ class renderer_plugin_deckjs extends Doku_Renderer_xhtml {
 <!--[if IE 8]>    <html class="no-js ie8" lang="'.$conf['lang'].'"> <![endif]-->
 <!--[if gt IE 8]><!-->  <html class="no-js" lang="'.$conf['lang'].'"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title>'.$clear_title.' - '.$conf['title'].'</title>
+<title>'.$clear_title.' - '.$conf['title'].'</title>
 
-	<meta name="description" content="'.$clear_description.'">
-	<meta name="author" content="'.$conf['title'].'">
-	<meta name="viewport" content="width=1024, user-scalable=no">
+<meta name="description" content="'.$clear_description.'">
+<meta name="author" content="'.$conf['title'].'">
+<meta name="viewport" content="width=1024, user-scalable=no">
 
-	<!-- Core and extension CSS files -->
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/core/deck.core.css">
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/goto/deck.goto.css">
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/menu/deck.menu.css">
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/navigation/deck.navigation.css">
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/status/deck.status.css">
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/hash/deck.hash.css">
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/scale/deck.scale.css">
+<!-- Core and extension CSS files -->
+<link rel="stylesheet" href="'.$this->base.'/deckjs/core/deck.core.css">
+<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/goto/deck.goto.css">
+<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/menu/deck.menu.css">
+<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/navigation/deck.navigation.css">
+<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/status/deck.status.css">
+<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/hash/deck.hash.css">
+<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/scale/deck.scale.css">
 
-	<!-- Style theme. More available in /themes/style/ or create your own. -->
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/themes/style/'.$this->theme.'.css">
+<!-- Style theme. More available in /themes/style/ or create your own. -->
+<link rel="stylesheet" href="'.$this->base.'/deckjs/themes/style/'.$this->theme.'.css">
 
-	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/themes/transition/'.$this->transition.'.css">
+<!-- Transition theme. More available in /themes/transition/ or create your own. -->
+<link rel="stylesheet" href="'.$this->base.'/deckjs/themes/transition/'.$this->transition.'.css">
 
-	<script src="'.$this->base.'/deckjs/modernizr.custom.js"></script>
+<script src="'.$this->base.'/deckjs/modernizr.custom.js"></script>
 </head>
 
 <body class="deck-container">
@@ -148,7 +148,6 @@ class renderer_plugin_deckjs extends Doku_Renderer_xhtml {
 
 <!-- deck.hash snippet -->
 <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
-
 
 <!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
 <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
