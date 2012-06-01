@@ -16,7 +16,9 @@ require_once DOKU_INC.'inc/parser/xhtml.php';
 class renderer_plugin_deckjs extends Doku_Renderer_xhtml {
     var $slideopen = false;
     var $notesopen = false;
-    var $base='';
+    var $base = '';
+	var $theme = '';
+	var $transition = '';
 
     /**
      * the format we produce
@@ -44,6 +46,8 @@ class renderer_plugin_deckjs extends Doku_Renderer_xhtml {
         );
         p_set_metadata($ID,array('format' => array('deckjs' => $headers) ));
         $this->base = DOKU_BASE.'lib/plugins/deckjs';
+        $this->theme = isset($_GET['theme'])?$_GET['theme']:$this->getConf('theme');
+        $this->transition = isset($_GET['transition'])?$_GET['transition']:$this->getConf('transition');
     }
 
     /**
@@ -89,10 +93,10 @@ class renderer_plugin_deckjs extends Doku_Renderer_xhtml {
 	<link rel="stylesheet" href="'.$this->base.'/deckjs/extensions/scale/deck.scale.css">
 
 	<!-- Style theme. More available in /themes/style/ or create your own. -->
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/themes/style/web-2.0.css">
+	<link rel="stylesheet" href="'.$this->base.'/deckjs/themes/style/'.$this->theme.'.css">
 
 	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
-	<link rel="stylesheet" href="'.$this->base.'/deckjs/themes/transition/horizontal-slide.css">
+	<link rel="stylesheet" href="'.$this->base.'/deckjs/themes/transition/'.$this->transition.'.css">
 
 	<script src="'.$this->base.'/deckjs/modernizr.custom.js"></script>
 </head>
@@ -116,7 +120,7 @@ class renderer_plugin_deckjs extends Doku_Renderer_xhtml {
         $this->doc = preg_replace('#<p>\s*</p>#','',$this->doc);
 
         if($this->slideopen){
-            $this->doc .= '</div>'.DOKU_LF; //close previous slide
+            $this->doc .= '</section>'.DOKU_LF; //close previous slide
         }
         if($this->notesopen){
             $this->doc .= '</div>'.DOKU_LF; //close notes
@@ -179,35 +183,46 @@ $(function() {
         if($level == 1){
             if(!$this->slideopen){
                 $this->deckjs_init($text); // this is the first slide
-                $level = 2;
             }else{
                 return;
             }
         }
-
-        if($level == 2){
+        else if($level == 2){
             if($this->notesopen){
                 $this->doc .= '</div>'.DOKU_LF; //close notes
                 $this->notesopen = false;
-	    }
-            $this->doc .= '<div class="slide">'.DOKU_LF;
+			}
+			if ($this->slideopen){
+				$this->doc .= DOKU_LF.'</section>'.DOKU_LF;
+			}
+            $this->doc .= '<section class="slide">'.DOKU_LF;
             $this->slideopen = true;
         }
-        $this->doc .= '<h'.($level).'>';
-        $this->doc .= $this->_xmlEntities($text);
-        $this->doc .= '</h'.($level).'>'.DOKU_LF;
-    }
+		else if($level == 3){
+		}
+		
+		if ($level >= 2){
+			$this->doc .= '<h'.($level).'>';
+			$this->doc .= $this->_xmlEntities($text);
+			$this->doc .= '</h'.($level).'>'.DOKU_LF;
+		}
+	}
+
+	var $section_stack = array();
 
     /**
      * Top-Level Sections are slides
      */
     function section_open($level) {
 //        if($level < 3){
-//            $this->doc .= '<div class="slidecontent">'.DOKU_LF;
+//            $this->doc .= '<section class="slidecontent">'.DOKU_LF;
 //        }else{
-//            $this->doc .= '<div>'.DOKU_LF;
+//            $this->doc .= '<section>'.DOKU_LF;
 //        }
         // we don't use it 
+    }
+
+    function section_close() {
     }
 
     /**
@@ -227,11 +242,19 @@ $(function() {
         $this->doc .= $this->_xmlEntities($acronym);
     }
 
+	function p_open() {
+        $this->doc .= '<p>';
+    }
+
+    function p_close() {
+        $this->doc .= '</p>'.DOKU_LF;
+    }
+
     /**
      * A line stops the slide and start the handout section
      */
     function hr() {
-        $this->doc .= '<div class="notes">'.DOKU_LF;
+        $this->doc .= '<div class="notes" style="display:none">'.DOKU_LF;
         $this->notesopen = true;
     }
 

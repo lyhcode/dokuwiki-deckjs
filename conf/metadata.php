@@ -1,4 +1,5 @@
 <?php
 
-$meta['template'] = array('dirchoice','_dir' => DOKU_INC.'lib/plugins/s5reloaded/ui/');
+$conf['theme'] = 'Style Themes';
+$conf['transition'] = 'Transition Themes';
 

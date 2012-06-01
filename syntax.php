@@ -51,8 +51,7 @@ class syntax_plugin_deckjs extends DokuWiki_Syntax_Plugin {
      * Handle the match
      */
     function handle($match, $state, $pos, &$handler){
-	if($match!='~~DECKJS~~') return array(trim(substr($match, 8, -2)));
-        return array();
+		return ($match != '~~DECKJS~~')?explode(' ', trim(substr($match, 8, -2))):array();
     }
 
     /**
@@ -62,9 +61,18 @@ class syntax_plugin_deckjs extends DokuWiki_Syntax_Plugin {
         global $ID;
         if($format != 'xhtml') return false;
 
-	$renderer->doc .= '<a href="'.exportlink($ID, 'deckjs',sizeof($data)?array('s5theme'=>$data[0]):null).'" title="'.$this->getLang('view').'" class="deckjs-link">';
-        $renderer->doc .= '<img src="'.DOKU_BASE.'lib/plugins/deckjs/screen.gif" align="right" alt="'.$this->getLang('view').'" width="48" height="48" />';
-        $renderer->doc .= '</a>';
+		$args = null;
+		if (count($data)==1) {
+			$args = array('theme'=>$data[0]);
+		}
+		else if (count($data)>1) {
+			$args = array('theme'=>$data[0], 'transition'=>$data[1]);
+		}
+
+		$iconhtml = '<a href="'.exportlink($ID, 'deckjs', $args).'" title="'.$this->getLang('view').'" class="deckjs-link">';
+        $iconhtml.= '<img src="'.DOKU_BASE.'lib/plugins/deckjs/screen.gif" align="right" alt="'.$this->getLang('view').'" width="48" height="48" />';
+		$iconhtml.= '</a>';
+        $renderer->doc = $iconhtml . $renderer->doc;
         return true;
     }
 }
