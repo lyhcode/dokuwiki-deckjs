@@ -81,7 +81,8 @@ class renderer_plugin_deckjs extends Doku_Renderer_xhtml {
 
 <meta name="description" content="'.$clear_description.'">
 <meta name="author" content="'.$conf['title'].'">
-<meta name="viewport" content="width=1024, user-scalable=no">
+<meta name="viewport" content="width=1024, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <!-- Core and extension CSS files -->
 <link rel="stylesheet" href="'.$this->base.'/deckjs/core/deck.core.css">
