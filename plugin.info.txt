@@ -1,0 +1,8 @@
+# General Plugin Info do not edit
+base   deckjs
+author lyhcode
+email  lyhcode@gmail.com
+date   2012-06-01
+name   Deck.js Slideshow Plugin
+desc   Display a Wiki page as Deck.js slideshow presentation
+url    http://www.dokuwiki.org/plugin:deckjs
