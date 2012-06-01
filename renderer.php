@@ -249,6 +249,14 @@ $(function() {
         $this->doc .= '</p>'.DOKU_LF;
     }
 
+	function quote_open() {
+        $this->doc .= '<blockquote>';
+    }
+
+    function quote_close() {
+        $this->doc .= '</blockquote>'.DOKU_LF;
+    }
+
     /**
      * A line stops the slide and start the handout section
      */
